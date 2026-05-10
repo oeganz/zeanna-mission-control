@@ -180,3 +180,19 @@ This project is licensed under the MIT License. See [`LICENSE`](./LICENSE).
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=abhi1693/openclaw-mission-control&type=date&legend=top-left)](https://www.star-history.com/#abhi1693/openclaw-mission-control&type=date&legend=top-left)
+
+## Deployment
+
+Auto-deploys to Railway via GitHub Actions on push to `main`.
+
+**Required secrets:**
+- `RAILWAY_TOKEN`
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+- `CLERK_SECRET_KEY`
+- `NEXT_PUBLIC_API_URL`
+
+**Services:**
+- Frontend: Next.js dashboard
+- Backend: FastAPI + PostgreSQL + Redis
+
+**Status:** 🚀 Pipeline active
