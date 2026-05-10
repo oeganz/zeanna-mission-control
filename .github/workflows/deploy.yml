@@ -58,6 +58,8 @@ jobs:
         run: uv run alembic upgrade head
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AUTH_MODE: ${{ secrets.AUTH_MODE }}
+          BASE_URL: ${{ secrets.BASE_URL }}
 
       - name: Deploy to Railway
         run: |
