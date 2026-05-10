@@ -30,7 +30,7 @@ import {
 import {
   type healthzHealthzGetResponse,
   useHealthzHealthzGet,
-} from "@/api/generated/healthz/healthz";
+} from "@/api/generated/default/default";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -119,13 +119,16 @@ export default function DashboardPage() {
     },
   );
 
-  const healthQuery = useHealthzHealthzGet<healthzHealthzGetResponse, ApiError>(undefined, {
-    query: {
-      enabled: Boolean(isSignedIn),
-      refetchInterval: 15_000,
-      refetchOnMount: "always",
+  const healthQuery = useHealthzHealthzGet<healthzHealthzGetResponse, ApiError>(
+    {
+      query: {
+        refetchInterval: 15_000,
+        refetchOnMount: "always",
+        retry: false,
+      },
+      request: { cache: "no-store" },
     },
-  });
+  );
 
   const boards = useMemo(
     () =>
