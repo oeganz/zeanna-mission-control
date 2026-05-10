@@ -30,7 +30,7 @@ import {
 import {
   type healthzHealthzGetResponse,
   useHealthzHealthzGet,
-} from "@/api/generated/healthz/healthz";
+} from "@/api/generated/health/health";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -119,7 +119,7 @@ export default function DashboardPage() {
     },
   );
 
-  const healthQuery = useHealthzHealthzGet<healthzHealthzGetResponse, ApiError>(undefined, {
+  const healthQuery = useHealthzHealthzGet<healthzHealthzGetResponse, ApiError>({
     query: {
       enabled: Boolean(isSignedIn),
       refetchInterval: 15_000,
