@@ -60,6 +60,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           AUTH_MODE: ${{ secrets.AUTH_MODE }}
           BASE_URL: ${{ secrets.BASE_URL }}
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
 
       - name: Deploy to Railway
         run: |
