@@ -31,11 +31,10 @@ jobs:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
 
       - name: Deploy to Railway
-        uses: railway/cli@v3
-        with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: frontend
-          environment: production
+        run: |
+          npm install -g @railway/cli
+          railway login --token ${{ secrets.RAILWAY_TOKEN }}
+          railway up --service frontend
 
   deploy-backend:
     runs-on: ubuntu-latest
@@ -61,8 +60,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Deploy to Railway
-        uses: railway/cli@v3
-        with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: backend
-          environment: production
+        run: |
+          npm install -g @railway/cli
+          railway login --token ${{ secrets.RAILWAY_TOKEN }}
+          railway up --service backend
