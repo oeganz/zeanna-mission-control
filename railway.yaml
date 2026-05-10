@@ -1,0 +1,47 @@
+services:
+  - name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    startCommand: npm start
+    healthcheckPath: /
+    env:
+      - name: NEXT_PUBLIC_API_URL
+        value: https://backend-production.up.railway.app
+
+  - name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    healthcheckPath: /healthz
+    env:
+      - name: DATABASE_URL
+        value: postgres://postgres:password@postgres:5432/missioncontrol
+      - name: REDIS_URL
+        value: redis://redis:6379
+      - name: CLERK_SECRET_KEY
+        value: ${CLERK_SECRET_KEY}
+      - name: CLERK_PUBLISHABLE_KEY
+        value: ${CLERK_PUBLISHABLE_KEY}
+
+  - name: postgres
+    image: postgres:15
+    env:
+      - name: POSTGRES_USER
+        value: postgres
+      - name: POSTGRES_PASSWORD
+        value: password
+      - name: POSTGRES_DB
+        value: missioncontrol
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  - name: redis
+    image: redis:7
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
